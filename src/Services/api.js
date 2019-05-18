@@ -26,9 +26,10 @@ export function signOut(){
     return firebase.auth().signOut()
 }
 export let validateAuth = new Promise((resolve, reject) => {
-    firebase.auth().onAuthStateChanged((user)=> {
-      resolve(user)
-    })
+    if(localStorage.getItem("user"))    
+      resolve(true)
+    els 
+        reject()   
 })
 
 
@@ -51,8 +52,8 @@ export function list(collection){
     return fetch(`${process.env.API}/${collection}`)
 }
 
-export function where(collection,parameter,condition){
-	return database.ref(collection).orderByChild(parameter).equalTo(condition)
+export function where(collection,condition){
+	return fetch(`${process.env.API}/${collection}/${condition}`)
 }
 
 export function update(collection,id,values){

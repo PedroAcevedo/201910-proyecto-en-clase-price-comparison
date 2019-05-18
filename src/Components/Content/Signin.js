@@ -21,7 +21,7 @@ class Signin extends Component {
   	signIn(this.state.email,this.state.password)
     .then(()=>{
 			localStorage.setItem("user", this.state.email)
-      login()
+      login(this.state.email)
       NotificationManager.success('Ingreso exitoso', 'Scrappy')
     })
 		.catch(error=>{
