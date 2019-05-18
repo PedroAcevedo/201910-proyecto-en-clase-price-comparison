@@ -1,0 +1,45 @@
+.history {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 150px 50px 150px;
+  .history-head {
+    text-align: left;
+
+    .history-title {
+      font-size: 25px;
+      padding-bottom: 5px;
+      font-weight: bold;
+      border-bottom: $palet-1 3px solid;
+    }
+    .history-subtitle {
+      @include reset();
+      font-size: 20px;
+    }
+  }
+  .history-list {
+    display: flex;
+    flex-direction: column;
+    .list {
+      display: flex;
+      flex-direction: row;
+      padding: 10px 10px 10px 10px;
+      margin: 10px 10px 10px 10px;
+      border-radius: 20px;
+      text-align: left;
+    }
+  }
+  .button-round {
+    @include reset();
+    width: 60px;
+    height: 60px;
+    font-weight: bold;
+    border-radius: 30px;
+    align-content: center;
+    background-color: $links-header;
+    margin: 10px;
+  }
+  .button-round:hover {
+    border: 1px solid #aeaeae;
+    background-color: $main-color;
+  }
+}

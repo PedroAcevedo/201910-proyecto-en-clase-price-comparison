@@ -1,0 +1,47 @@
+.signup {
+  display: flex;
+  flex-direction: column;
+  align-content: left;
+  .title {
+    text-align: center;
+    margin: 30px 30px;
+  }
+
+  div {
+    align-content: stretch;
+    text-align: center;
+
+    button {
+      margin: 10px 10px 10px 10px;
+    }
+
+    input {
+      border-radius: 20px;
+      width: 100%;
+    }
+  }
+}
+.signin {
+  display: flex;
+  flex-direction: column;
+  align-content: left;
+  margin-bottom: 80px;
+  .title {
+    text-align: center;
+    margin: 50px 30px;
+  }
+
+  div {
+    align-content: stretch;
+    text-align: center;
+
+    button {
+      margin: 10px 10px 10px 10px;
+    }
+
+    input {
+      border-radius: 20px;
+      width: 100%;
+    }
+  }
+}

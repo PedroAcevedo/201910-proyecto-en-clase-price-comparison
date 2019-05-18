@@ -1,0 +1,120 @@
+body {
+  @include reset();
+  background: $background;
+  color: $text-color;
+  font-family: "Roboto", sans-serif;
+}
+
+.component-content {
+  padding: 50px 150px 50px 150px;
+}
+
+.main {
+  display: grid;
+  grid-template: "leftnavbar catalogue";
+}
+.container {
+  width: 100%;
+  justify-content: center;
+}
+.container-flex-h {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.container-flex-h > div {
+  text-align: center;
+}
+
+.container-flex-v {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container-flex-v > div {
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+.flex {
+  display: flex;
+}
+.flex-between {
+  justify-content: space-between;
+}
+
+/*buttons*/
+.button {
+  border: none;
+  cursor: pointer;
+  font-size: 0.8em;
+  margin-left: 20px;
+  transition: all 0.4s;
+  padding: 10px 20px 10px 20px;
+}
+.button-primary {
+  background: $button-primary-background;
+  color: #ffffff;
+  border-radius: 30px;
+}
+.button-primary:hover {
+  background: $main-color;
+}
+.button-secondary {
+  background: $white;
+  color: $button-secondary-text;
+}
+.button-secondary:hover {
+  background: $gray-light;
+}
+.button-cancel {
+  background: $red;
+  border: 1px solid $red;
+  color: $text-color;
+  border-radius: 30px;
+  margin-bottom: 20px;
+}
+.button-cancel:hover {
+  border: 1px solid #aeaeae;
+  color: #aeaeae;
+}
+.float {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+}
+/*form*/
+.form {
+  margin: 0 auto;
+  padding: 10px 20px 10px 20px;
+}
+
+.form div:last-child {
+  text-align: center;
+}
+.form * {
+  outline: 0;
+}
+
+/*inputs*/
+.input {
+  border: 1px solid $gray;
+  border-radius: 1%;
+  box-sizing: border-box;
+  font-size: 0.8em;
+  margin-bottom: 7%;
+  padding: 10px 20px 10px 20px;
+  margin: 10px 0 10px 10px;
+  width: 400px;
+}
+.input:focus {
+  border: 1px solid $main-color;
+}
+.input-rounded {
+  border-radius: 20px;
+}

@@ -1,0 +1,45 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  padding: 40px 150px 50px 150px;
+  text-align: center;
+  .title {
+    text-align: left;
+    margin-bottom: 30px;
+    border-bottom: $palet-1 3px solid;
+  }
+  .label {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px;
+    margin: 5px;
+  }
+  .info-profile {
+    padding: 10px 0px 10px 10px;
+  }
+
+  div {
+    .profile-photo {
+      @include reset();
+      text-align: center;
+      width: 200px;
+      height: 200px;
+      background-color: $gray;
+      border-radius: 50%;
+      align-self: flex-end;
+      .photo {
+        width: 100%;
+      }
+    }
+
+    button {
+      margin: 10px 10px 10px 10px;
+    }
+
+    input {
+      border-radius: 20px;
+      width: 100%;
+    }
+  }
+}

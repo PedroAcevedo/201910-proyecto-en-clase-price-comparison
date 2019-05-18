@@ -1,0 +1,18 @@
+@import "../../node_modules/normalize.css/normalize.css";
+@import "../../node_modules/react-notifications/lib/notifications.css";
+@import "variables";
+@import "./mixins";
+@import "general";
+@import "section";
+
+@import "Components/aside";
+@import "Components/footer";
+@import "Components/header";
+@import "Components/catalogue";
+@import "Components/sign";
+@import "Components/cart";
+@import "Components/profile";
+@import "Components/adminprofile";
+@import "Components/accountsettings";
+@import "Components/history";
+@import "Components/contact";
