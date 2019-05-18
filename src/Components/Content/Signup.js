@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import {create,createUser,upload} from '../../Services/api';
+import {create,createUser,where} from '../../Services/api';
 import Compress from 'compress.js'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 const compress = new Compress()
@@ -57,24 +57,35 @@ class Signup extends Component {
           if(this.state.password!==this.state.passwordConfirm ){					
             NotificationManager.error('Las contraseñas no coinciden', 'Scrappy')
           }else{
-            createUser({
-              name: this.state.name,
-              email: this.state.email,
-              password: this.state.password,
-              profileImage: this.state.profileImage,  
-              admin: false
+          
+            where("users",this.state.email)
+            .then( response => {
+              return response.json();
             })
-           .then((response)=>{					
-                  NotificationManager.success('Usuario creado', 'Scrappy')
-                  this.setState({
-                    name: '',
-                    email: '',
-                    password:'',
-                    passwordConfirm:'',
-                    profileImage:''
-                  })
-                  this.props.history.push("/Signin");
-              })					
+            .then( json => {
+              if(json==null){
+                createUser({
+                  name: this.state.name,
+                  email: this.state.email,
+                  password: this.state.password,
+                  profileImage: this.state.profileImage,  
+                  admin: false
+                })
+               .then((response)=>{					
+                      NotificationManager.success('Usuario creado', 'Scrappy')
+                      this.setState({
+                        name: '',
+                        email: '',
+                        password:'',
+                        passwordConfirm:'',
+                        profileImage:''
+                      })
+                      this.props.history.push("/Signin");
+                  })		
+              }else{
+                NotificationManager.error('Este correo ya está registrado.', 'Scrappy')
+              }
+            }) 
             .catch(error=>{
               console.log(error)
               NotificationManager.error('Error al registrarse', 'Scrappy')

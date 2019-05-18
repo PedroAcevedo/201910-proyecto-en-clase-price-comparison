@@ -22,7 +22,6 @@ class AuthProvider extends Component {
       this.state.user = []
       this.state.user.push(json)
       this.setState({ isAuth: true})
-      console.log(this.state);
     }) 
     .catch(error=>{
 			console.log(error.message)
@@ -44,9 +43,8 @@ class AuthProvider extends Component {
             isAuth:true,
             email: user
         })
-        console.log(this.state)
         if(this.state.user.length == 0){
-          where("users",email)
+          where("users",this.state.email)
           .then( response => {
             return response.json();
           })

@@ -28,7 +28,7 @@ export function signOut(){
 export let validateAuth = new Promise((resolve, reject) => {
     if(localStorage.getItem("user"))    
       resolve(true)
-    els 
+    else 
         reject()   
 })
 

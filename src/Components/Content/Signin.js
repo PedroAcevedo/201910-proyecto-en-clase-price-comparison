@@ -19,10 +19,19 @@ class Signin extends Component {
   handleSubmit(e,login,isAuth){
     e.preventDefault()
   	signIn(this.state.email,this.state.password)
-    .then(()=>{
-			localStorage.setItem("user", this.state.email)
-      login(this.state.email)
-      NotificationManager.success('Ingreso exitoso', 'Scrappy')
+    .then((response)=>{
+       return response.json();
+
+    })
+    .then((json) => {
+      if (json["login"]==true)
+      {
+        localStorage.setItem("user", this.state.email)
+        login(this.state.email)
+        NotificationManager.success('Ingreso exitoso', 'Scrappy')
+      }else{
+        NotificationManager.error('Usuario o contraseña incorrectas', 'Scrappy')
+      }
     })
 		.catch(error=>{
 			console.log(error.message)
