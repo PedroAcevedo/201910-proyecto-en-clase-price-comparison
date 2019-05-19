@@ -57,8 +57,7 @@ class Signup extends Component {
           if(this.state.password!==this.state.passwordConfirm ){					
             NotificationManager.error('Las contraseñas no coinciden', 'Scrappy')
           }else{
-          
-            where("users",this.state.email)
+            where("users/login",this.state.email)
             .then( response => {
               return response.json();
             })

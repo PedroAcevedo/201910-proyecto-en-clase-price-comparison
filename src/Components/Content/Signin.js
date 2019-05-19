@@ -11,7 +11,8 @@ class Signin extends Component {
 		super()
 		this.state = {
 			email: '',
-			password:''
+      password:'',
+      admin: ''
 		}
 		this.handleChange = this.handleChange.bind(this)
 	}
@@ -27,6 +28,12 @@ class Signin extends Component {
       if (json["login"]==true)
       {
         localStorage.setItem("user", this.state.email)
+        localStorage.setItem("token", json["token"])
+        if(json["admin"]==true){
+          this.setState({
+            admin: true
+          })
+        }
         login(this.state.email)
         NotificationManager.success('Ingreso exitoso', 'Scrappy')
       }else{
@@ -50,8 +57,15 @@ class Signin extends Component {
     return (
       <AuthConsumer>
           {({ login,isAuth}) => (
-                                    isAuth? 
-                                      <Redirect to="/"/>
+                                    isAuth?
+                                      <div>
+                                        {
+                                          this.state.admin?
+                                          <Redirect to="/Adminprofile"/>
+                                          :
+                                          <Redirect to="/"/>
+                                        }  
+                                      </div>            
                                     :
                                     <article className="signin">
                                       <form className="form" onSubmit={(e)=>this.handleSubmit(e,login,isAuth)}>

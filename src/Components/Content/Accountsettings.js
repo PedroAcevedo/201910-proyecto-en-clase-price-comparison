@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {where,update} from './../../Services/firebase'
+import {profile,update} from './../../Services/api'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import {AuthConsumer} from './../AuthContext';
 import { Redirect } from 'react-router';
@@ -53,18 +53,15 @@ class Accountsettings extends Component {
 
 handleSubmit(e){
     e.preventDefault()
-    const updates = {}; // this line is different
-    if(this.state.name != ''){
-      updates["/name"] = this.state.name;
-    }
-    if(this.state.address != ''){
-      updates["/address"] = this.state.address;
-    }
-    updates["/profileImage"] = this.state.profileImage;
-    update("Usuarios",this.state.id,updates)
+    update({
+      email: this.state.email,
+      name: this.state.name,
+      profileImage: this.state.profileImage,
+      address: this.state.address
+    })
     .then(()=>{
       NotificationManager.success('Datos actualizados', 'Scrappy')
-      //this.props.history.push("/Profile");
+      this.props.history.push("/Signin");
     })
     .catch(error=>{
 			console.log(error.message)
@@ -73,21 +70,18 @@ handleSubmit(e){
   }
 
   componentWillMount(){
-    console.log(this.props.email)
-    where("Usuarios","email",this.props.email)
-    .on('value',snapshot=>{
-      const usuario = snapshot.val();
-      let user
-      for(user in usuario){
-        this.setState({
-          id: user,
-          name: usuario[user].name,
-          email: usuario[user].email,
-          address: usuario[user].address,
-          profileImage: usuario[user].profileImage
-        })
-      }
-      console.log(this.state.email)
+    profile("users",this.props.email)
+    .then( response => {
+      return response.json();
+    })
+    .then( json => {
+      this.setState({
+        id: json["_id"],
+        name: json["name"],
+        email: json["email"],
+        address: json["address"],
+        profileImage: json["profileImage"]
+      })
     })
   }
 

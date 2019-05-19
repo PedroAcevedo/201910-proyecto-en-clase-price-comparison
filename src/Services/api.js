@@ -18,7 +18,7 @@ export function signIn(email,password){
             password
         }),
         headers: {
-            'Content-Type':'application/json'
+            'Content-Type':'application/json', 
         }
     })
 }
@@ -27,21 +27,20 @@ export function signOut(){
 }
 export let validateAuth = new Promise((resolve, reject) => {
     if(localStorage.getItem("user"))    
-      resolve(true)
+      resolve(localStorage.getItem("user"))
     else 
-        reject()   
+      reject()   
 })
 
 
 //Firebase CRUD
 export function create(collection, obj){
-    let token = null
     return fetch(`${process.env.API}/${collection}`,{
         method: 'POST',
         body: JSON.stringify(obj),
         headers: {
             'Content-Type':'application/json',
-            'token': token  ? token : null 
+            'token': localStorage.getItem("token")
         }
     }
     
@@ -56,8 +55,27 @@ export function where(collection,condition){
 	return fetch(`${process.env.API}/${collection}/${condition}`)
 }
 
-export function update(collection,id,values){
-    return database.ref(collection).child(id).update(values)
+export function profile(collection,condition){
+	return fetch(`${process.env.API}/${collection}/${condition}`,{
+        method: 'GET',
+        headers: {
+            'Content-Type':'application/json',
+            'token': localStorage.getItem('token')
+        }
+    })
+}
+
+export function update(user){
+    console.log(user)
+    console.log(localStorage.getItem('token'))
+    return fetch(`${process.env.API}/users`,{
+        method: 'PUT',
+        body: JSON.stringify(user),
+        headers: {
+            'Content-Type':'application/json',
+            'token': localStorage.getItem('token')
+        }
+    })
 }
 
 export function remove(collection, key){

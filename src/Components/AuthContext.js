@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {where,validateAuth,signOut} from './../Services/api'
+import {profile,validateAuth,signOut} from './../Services/api'
 const AuthContext = React.createContext()
 
 class AuthProvider extends Component {
@@ -14,7 +14,7 @@ class AuthProvider extends Component {
   login(email){
     setTimeout(() => this.setState({ isAuth: true }), 1000)
     console.log(email)
-    where("users",email)
+    profile("users",email)
 		.then( response => {
       return response.json();
     })
@@ -44,7 +44,7 @@ class AuthProvider extends Component {
             email: user
         })
         if(this.state.user.length == 0){
-          where("users",this.state.email)
+          profile("users",this.state.email)
           .then( response => {
             return response.json();
           })
