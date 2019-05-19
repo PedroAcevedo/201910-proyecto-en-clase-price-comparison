@@ -11,7 +11,8 @@ class Adminprofile extends Component {
       create_cat:false,
       name_cat:'',
       categories:[]		
-    }		
+    }
+    this.refresh = this.refresh.bind(this)		
     this.add_category = this.add_category.bind(this) 
     this.handleChange = this.handleChange.bind(this)		
     this.handleSubmit = this.handleSubmit.bind(this) 
@@ -24,6 +25,20 @@ class Adminprofile extends Component {
     })
   }
   
+  refresh(){
+    list("categories")
+		.then( response => {
+      return response.json();
+    })
+    .then( json => {
+			this.setState({
+        name_cat:'',
+        create_cat:false,
+				categories:json
+			})
+    })
+  }
+
   handleChange(e){
 		this.setState({
 			[e.target.name]:e.target.value
@@ -43,17 +58,7 @@ class Adminprofile extends Component {
 			}
 			create('categories',category)
 			.then(()=>{
-				list("categories")
-        .then( response => {
-          return response.json();
-        })
-        .then( json => {
-          this.setState({
-            name_cat:'',
-            create_cat:false,
-            categories:json
-          })
-        })
+        this.refresh();
         NotificationManager.success('Categoria registrada', 'scrappy');
 			})
 		}	
@@ -68,17 +73,7 @@ class Adminprofile extends Component {
   }
 
   componentDidMount(){
-    list("categories")
-		.then( response => {
-      return response.json();
-    })
-    .then( json => {
-			this.setState({
-        name_cat:'',
-        create_cat:false,
-				categories:json
-			})
-    })
+    this.refresh();
   }
   
   render() {
@@ -102,7 +97,7 @@ class Adminprofile extends Component {
           { this.state.categories.length > 0 ?
 							this.state.categories.map(category=>{								
                 return(
-                    <Item_cat key = {category._id} category = {category} />
+                    <Item_cat key = {category._id} category = {category} action={this.refresh} />
                 )
 							})
 						:

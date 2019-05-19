@@ -12,6 +12,7 @@ class Item extends Component {
         removeprods(`categories/${this.props.category}/products`,{"name": this.props.product.name, "date":this.props.product.date})
         .then(()=>{
             NotificationManager.success('Producto removido.', 'Scrappy');
+            this.props.action();
             console.log(this.props.product.name, this.props.category,"scrappy")
         })
      }

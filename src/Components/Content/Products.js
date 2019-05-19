@@ -13,7 +13,8 @@ class Products extends Component {
       create_prod:false,
       name_prod:'',
       products:[]		
-    }		
+    }	
+    this.refresh = this.refresh.bind(this)	
     this.add_product = this.add_product.bind(this) 
     this.handleChange = this.handleChange.bind(this)		
     this.handleSubmit = this.handleSubmit.bind(this) 
@@ -26,6 +27,22 @@ class Products extends Component {
     })
   }
   
+  refresh(){
+    list(`categories/${this.props.match.params.id}/products`)
+		.then( response => {
+      return response.json();
+    })
+    .then( json => {
+      console.log(json)
+			this.setState({
+        name_prod:'',
+        create_prod:false,
+				products:json
+			});
+    })
+  }
+
+
   handleChange(e){
 		this.setState({
 			[e.target.name]:e.target.value
@@ -49,6 +66,7 @@ class Products extends Component {
           name_prod:'',
           create_prod:false
         })
+        this.refresh();
         NotificationManager.success('Producto registrado.', 'Scrappy');
 			})
 		}	
@@ -63,19 +81,7 @@ class Products extends Component {
   }
 
   componentDidMount(){
-    list(`categories/${this.props.match.params.id}/products`)
-		.then( response => {
-      return response.json();
-    })
-    .then( json => {
-      console.log(json)
-			this.setState({
-        name_prod:'',
-        create_prod:false,
-				products:json
-			});
-    })
-
+    this.refresh();
   }
 
   render() {
@@ -97,7 +103,7 @@ class Products extends Component {
         { this.state.products.length > 0 ?
 							this.state.products.map(product=>{								
                 return(
-                    <Item key={product.key} product={product} category={this.props.match.params.id} /> 
+                    <Item key={product.key} product={product} category={this.props.match.params.id} action={this.refresh}/> 
 									)
 							})
 						:

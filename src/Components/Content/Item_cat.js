@@ -13,6 +13,7 @@ class Item_cat extends Component {
         remove({"name": this.props.category.name})
         .then(()=>{
             NotificationManager.success('Categoria removida.', 'Scrappy');
+            this.props.action();
             console.log(this.props.category.name,"remove succesfully")
         })
      }
@@ -43,7 +44,7 @@ class Item_cat extends Component {
           </Link>
         </td>
         <td>
-          <button className="button primary-button button-round" onClick={this.onClose}>
+          <button className="button primary-button button-round" onClick={this.onClose} >
             <img
               className="image-button"
               src={require("../../CSS/icons/PNG/minus.png")}
