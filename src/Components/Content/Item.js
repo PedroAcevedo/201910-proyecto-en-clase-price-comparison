@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {remove} from '../../Services/firebase';
+import {removeprods} from '../../Services/api';
 import {NotificationManager} from 'react-notifications';
 
 class Item extends Component {
@@ -9,10 +9,10 @@ class Item extends Component {
     }
     
     onClose(e){
-        remove(`Categorias/${this.props.category}/Productos`,this.props.product.id)
+        removeprods(`categories/${this.props.category}/products`,{"name": this.props.product.name, "date":this.props.product.date})
         .then(()=>{
             NotificationManager.success('Producto removido.', 'Scrappy');
-            console.log(this.props.product.name,"scrappy")
+            console.log(this.props.product.name, this.props.category,"scrappy")
         })
      }
 
@@ -20,8 +20,8 @@ class Item extends Component {
     return (
             <tr>
                 <td>
-                <p>{this.props.product.name}</p>
-                <p>Última actualización: {this.props.product.fecha}</p>
+                <p>{this.props.product.name} </p>
+                <p>Última actualización: {this.props.product.date}</p>
                 </td>
                 <td>
                 <button className="button primary-button button-round">

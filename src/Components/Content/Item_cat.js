@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import {remove} from '../../Services/firebase';
+import {remove} from '../../Services/api';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { Link } from "react-router-dom";
+
 class Item_cat extends Component {
     constructor(){
         super()		
@@ -8,7 +10,7 @@ class Item_cat extends Component {
     }
     
     onClose(e){
-        remove("Categorias",this.props.category.id)
+        remove({"name": this.props.category.name})
         .then(()=>{
             NotificationManager.success('Categoria removida.', 'Scrappy');
             console.log(this.props.category.name,"remove succesfully")
@@ -20,7 +22,7 @@ class Item_cat extends Component {
         <tr>
         <td>
           <p>{this.props.category.name}</p>
-          <p>Última actualización: {this.props.category.fecha}</p>
+          <p>Última actualización: {this.props.category.date}</p>
         </td>
         <td>
           <button className="button primary-button button-round">
@@ -31,7 +33,7 @@ class Item_cat extends Component {
           </button>
         </td>
         <td>
-          <Link to={`/products/${this.props.category.id},${this.props.category.name}`}>
+          <Link to={`/products/${this.props.category._id},${this.props.category.name}`}>
             <button className="button primary-button button-round">
               <img
                 className="image-button"

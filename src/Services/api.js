@@ -66,8 +66,6 @@ export function profile(collection,condition){
 }
 
 export function update(user){
-    console.log(user)
-    console.log(localStorage.getItem('token'))
     return fetch(`${process.env.API}/users`,{
         method: 'PUT',
         body: JSON.stringify(user),
@@ -78,10 +76,27 @@ export function update(user){
     })
 }
 
-export function remove(collection, key){
-    return database.ref(collection).child(key).remove()
+export function remove(key){
+    return fetch(`${process.env.API}/categories`,{
+        method: 'DELETE',
+        body: JSON.stringify(key),
+        headers: {
+            'Content-Type':'application/json',
+            'token': localStorage.getItem('token')
+        }
+    })
 }
 
+export function removeprods(collection,key){
+    return fetch(`${process.env.API}/${collection}`,{
+        method: 'DELETE',
+        body: JSON.stringify(key),
+        headers: {
+            'Content-Type':'application/json',
+            'token': localStorage.getItem('token')
+        }
+    })
+}
 
 //firebase storage
 export function upload(file,name){

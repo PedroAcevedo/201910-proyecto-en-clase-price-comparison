@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import {create} from '../../Services/firebase'
 import { Link } from "react-router-dom";
-import {list} from '../../Services/firebase';
+import {create,list} from '../../Services/api';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import Item_cat from './Item_cat';
 
@@ -39,15 +38,21 @@ class Adminprofile extends Component {
       var months = new Array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre')
       var fecha_actual = new Date();
       const category = {
-        nombre:this.state.name_cat,
-        fecha: fecha_actual.getDate() + " de " + months[fecha_actual.getMonth()] + " del " + fecha_actual.getFullYear(),
+        name:this.state.name_cat,
+        date: fecha_actual.getDate() + " de " + months[fecha_actual.getMonth()] + " del " + fecha_actual.getFullYear(),
 			}
-			create('Categorias',category)
+			create('categories',category)
 			.then(()=>{
-				this.setState({
-          name_cat:'',
-          create_cat:false
-          
+				list("categories")
+        .then( response => {
+          return response.json();
+        })
+        .then( json => {
+          this.setState({
+            name_cat:'',
+            create_cat:false,
+            categories:json
+          })
         })
         NotificationManager.success('Categoria registrada', 'scrappy');
 			})
@@ -63,23 +68,17 @@ class Adminprofile extends Component {
   }
 
   componentDidMount(){
-		list('Categorias')
-		.on('value',snapshot=>{
-			const categories = snapshot.val()
-			let category, tmp=[]
-			for(category in categories){
-				tmp.push({
-					id:category,
-          name:categories[category].nombre,
-          fecha:categories[category].fecha
-				})
-			}
+    list("categories")
+		.then( response => {
+      return response.json();
+    })
+    .then( json => {
 			this.setState({
         name_cat:'',
         create_cat:false,
-				categories:tmp
+				categories:json
 			})
-		})
+    })
   }
   
   render() {
@@ -103,7 +102,7 @@ class Adminprofile extends Component {
           { this.state.categories.length > 0 ?
 							this.state.categories.map(category=>{								
                 return(
-                    <Item_cat category = {category} />
+                    <Item_cat key = {category._id} category = {category} />
                 )
 							})
 						:
