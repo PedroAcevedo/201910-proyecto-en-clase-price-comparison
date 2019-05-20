@@ -19,6 +19,9 @@ class Aside extends Component {
 				categories: json
       })
     })
+    .catch(error=>{
+			console.log(error.message)
+    })
   }
 
 

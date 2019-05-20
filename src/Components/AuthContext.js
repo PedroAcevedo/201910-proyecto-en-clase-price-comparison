@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {validateAuth,where,signOut} from './../Services/firebase'
+import {profile,validateAuth,signOut} from './../Services/api'
 const AuthContext = React.createContext()
 
 class AuthProvider extends Component {
@@ -13,23 +13,20 @@ class AuthProvider extends Component {
 
   login(email){
     setTimeout(() => this.setState({ isAuth: true }), 1000)
-        where("Usuarios","email",email)
-        .on('value',snapshot=>{
-          const usuario = snapshot.val();
-          let user
-          for(user in usuario){
-            this.state.user = []
-            this.state.user.push({
-              id: user,
-              name: usuario[user].name,
-              email: usuario[user].email,
-              address: usuario[user].address,
-              profileImage: usuario[user].profileImage
-            })
-          }
-          this.setState({ isAuth: true})
-        })
-      this.setState({email: email})
+    console.log(email)
+    profile("users",email)
+		.then( response => {
+      return response.json();
+    })
+    .then( json => {
+      this.state.user = []
+      this.state.user.push(json)
+      this.setState({ isAuth: true})
+    }) 
+    .catch(error=>{
+			console.log(error.message)
+    })
+    this.setState({email: email})
   }
 
   logout() {
@@ -44,25 +41,21 @@ class AuthProvider extends Component {
         if(user!=null)
           this.setState({
             isAuth:true,
-            email: user.email
+            email: user
         })
-        console.log(this.state)
         if(this.state.user.length == 0){
-          where("Usuarios","email",email)
-          .on('value',snapshot=>{
-            const usuario = snapshot.val();
-            let user
-            for(user in usuario){
-              this.state.user = []
-              this.state.user.push({
-                id: user,
-                name: usuario[user].name,
-                email: usuario[user].email,
-                address: usuario[user].address,
-                profileImage: usuario[user].profileImage
-              })
-            }
+          profile("users",this.state.email)
+          .then( response => {
+            return response.json();
+          })
+          .then( json => {
+            this.state.user = []
+            this.state.user.push(json)
             this.setState({ isAuth: true})
+            console.log(this.state);
+          }) 
+          .catch(error=>{
+            console.log(error.message)
           })
         }
     })

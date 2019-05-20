@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import {create} from '../../Services/firebase'
 import { Link } from "react-router-dom";
-import {list} from '../../Services/firebase';
+import {create,list} from '../../Services/api';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import Item_cat from './Item_cat';
 
@@ -12,7 +11,8 @@ class Adminprofile extends Component {
       create_cat:false,
       name_cat:'',
       categories:[]		
-    }		
+    }
+    this.refresh = this.refresh.bind(this)		
     this.add_category = this.add_category.bind(this) 
     this.handleChange = this.handleChange.bind(this)		
     this.handleSubmit = this.handleSubmit.bind(this) 
@@ -25,6 +25,20 @@ class Adminprofile extends Component {
     })
   }
   
+  refresh(){
+    list("categories")
+		.then( response => {
+      return response.json();
+    })
+    .then( json => {
+			this.setState({
+        name_cat:'',
+        create_cat:false,
+				categories:json
+			})
+    })
+  }
+
   handleChange(e){
 		this.setState({
 			[e.target.name]:e.target.value
@@ -39,16 +53,12 @@ class Adminprofile extends Component {
       var months = new Array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre')
       var fecha_actual = new Date();
       const category = {
-        nombre:this.state.name_cat,
-        fecha: fecha_actual.getDate() + " de " + months[fecha_actual.getMonth()] + " del " + fecha_actual.getFullYear(),
+        name:this.state.name_cat,
+        date: fecha_actual.getDate() + " de " + months[fecha_actual.getMonth()] + " del " + fecha_actual.getFullYear(),
 			}
-			create('Categorias',category)
+			create('categories',category)
 			.then(()=>{
-				this.setState({
-          name_cat:'',
-          create_cat:false
-          
-        })
+        this.refresh();
         NotificationManager.success('Categoria registrada', 'scrappy');
 			})
 		}	
@@ -63,23 +73,7 @@ class Adminprofile extends Component {
   }
 
   componentDidMount(){
-		list('Categorias')
-		.on('value',snapshot=>{
-			const categories = snapshot.val()
-			let category, tmp=[]
-			for(category in categories){
-				tmp.push({
-					id:category,
-          name:categories[category].nombre,
-          fecha:categories[category].fecha
-				})
-			}
-			this.setState({
-        name_cat:'',
-        create_cat:false,
-				categories:tmp
-			})
-		})
+    this.refresh();
   }
   
   render() {
@@ -103,7 +97,7 @@ class Adminprofile extends Component {
           { this.state.categories.length > 0 ?
 							this.state.categories.map(category=>{								
                 return(
-                    <Item_cat category = {category} />
+                    <Item_cat key = {category._id} category = {category} action={this.refresh} />
                 )
 							})
 						:

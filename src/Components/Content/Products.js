@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import {create} from '../../Services/firebase';
+import {create} from '../../Services/api';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-import {list} from '../../Services/firebase';
+import {list} from '../../Services/api';
 import Item from './Item';
 
 class Products extends Component {
@@ -13,7 +13,8 @@ class Products extends Component {
       create_prod:false,
       name_prod:'',
       products:[]		
-    }		
+    }	
+    this.refresh = this.refresh.bind(this)	
     this.add_product = this.add_product.bind(this) 
     this.handleChange = this.handleChange.bind(this)		
     this.handleSubmit = this.handleSubmit.bind(this) 
@@ -26,6 +27,22 @@ class Products extends Component {
     })
   }
   
+  refresh(){
+    list(`categories/${this.props.match.params.id}/products`)
+		.then( response => {
+      return response.json();
+    })
+    .then( json => {
+      console.log(json)
+			this.setState({
+        name_prod:'',
+        create_prod:false,
+				products:json
+			});
+    })
+  }
+
+
   handleChange(e){
 		this.setState({
 			[e.target.name]:e.target.value
@@ -40,15 +57,16 @@ class Products extends Component {
       var months = new Array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre')
       var fecha_actual = new Date();
 			const producto = {
-        nombre:this.state.name_prod,
-        fecha: fecha_actual.getDate() + " de " + months[fecha_actual.getMonth()] + " del " + fecha_actual.getFullYear(),
+        name:this.state.name_prod,
+        date: fecha_actual.getDate() + " de " + months[fecha_actual.getMonth()] + " del " + fecha_actual.getFullYear(),
 			}
-			create(`Categorias/${this.props.match.params.id}/Productos`,producto)
+			create(`categories/${this.props.match.params.id}/products`,producto)
 			.then(()=>{
 				this.setState({
           name_prod:'',
           create_prod:false
         })
+        this.refresh();
         NotificationManager.success('Producto registrado.', 'Scrappy');
 			})
 		}	
@@ -63,23 +81,7 @@ class Products extends Component {
   }
 
   componentDidMount(){
-		list(`Categorias/${this.props.match.params.id}/Productos`)
-		.on('value',snapshot=>{
-			const products = snapshot.val()
-			let product, tmp=[]
-			for(product in products){
-				tmp.push({
-					id:product,
-          name:products[product].nombre,
-          fecha:products[product].fecha
-				})
-			}
-			this.setState({
-        name_prod:'',
-        create_prod:false,
-				products:tmp
-			})
-		})
+    this.refresh();
   }
 
   render() {
@@ -101,7 +103,7 @@ class Products extends Component {
         { this.state.products.length > 0 ?
 							this.state.products.map(product=>{								
                 return(
-                    <Item key={product.key} product={product} category={this.props.match.params.id} /> 
+                    <Item key={product.key} product={product} category={this.props.match.params.id} action={this.refresh}/> 
 									)
 							})
 						:

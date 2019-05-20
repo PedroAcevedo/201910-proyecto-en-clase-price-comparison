@@ -18,7 +18,7 @@ export function signIn(email,password){
             password
         }),
         headers: {
-            'Content-Type':'application/json'
+            'Content-Type':'application/json', 
         }
     })
 }
@@ -26,21 +26,21 @@ export function signOut(){
     return firebase.auth().signOut()
 }
 export let validateAuth = new Promise((resolve, reject) => {
-    firebase.auth().onAuthStateChanged((user)=> {
-      resolve(user)
-    })
+    if(localStorage.getItem("user"))    
+      resolve(localStorage.getItem("user"))
+    else 
+      reject()   
 })
 
 
 //Firebase CRUD
 export function create(collection, obj){
-    let token = null
     return fetch(`${process.env.API}/${collection}`,{
         method: 'POST',
         body: JSON.stringify(obj),
         headers: {
             'Content-Type':'application/json',
-            'token': token  ? token : null 
+            'token': localStorage.getItem("token")
         }
     }
     
@@ -51,18 +51,52 @@ export function list(collection){
     return fetch(`${process.env.API}/${collection}`)
 }
 
-export function where(collection,parameter,condition){
-	return database.ref(collection).orderByChild(parameter).equalTo(condition)
+export function where(collection,condition){
+	return fetch(`${process.env.API}/${collection}/${condition}`)
 }
 
-export function update(collection,id,values){
-    return database.ref(collection).child(id).update(values)
+export function profile(collection,condition){
+	return fetch(`${process.env.API}/${collection}/${condition}`,{
+        method: 'GET',
+        headers: {
+            'Content-Type':'application/json',
+            'token': localStorage.getItem('token')
+        }
+    })
 }
 
-export function remove(collection, key){
-    return database.ref(collection).child(key).remove()
+export function update(user){
+    return fetch(`${process.env.API}/users`,{
+        method: 'PUT',
+        body: JSON.stringify(user),
+        headers: {
+            'Content-Type':'application/json',
+            'token': localStorage.getItem('token')
+        }
+    })
 }
 
+export function remove(key){
+    return fetch(`${process.env.API}/categories`,{
+        method: 'DELETE',
+        body: JSON.stringify(key),
+        headers: {
+            'Content-Type':'application/json',
+            'token': localStorage.getItem('token')
+        }
+    })
+}
+
+export function removeprods(collection,key){
+    return fetch(`${process.env.API}/${collection}`,{
+        method: 'DELETE',
+        body: JSON.stringify(key),
+        headers: {
+            'Content-Type':'application/json',
+            'token': localStorage.getItem('token')
+        }
+    })
+}
 
 //firebase storage
 export function upload(file,name){
