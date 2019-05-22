@@ -26,6 +26,12 @@ class Product extends Component {
   }
 
   render() {
+    let icon;
+    if (this.props.type == "Remove") {
+      icon = <i class="fas fa-trash-alt" />;
+    } else {
+      icon = <i className="fas fa-plus" />;
+    }
     return (
       <Card style={{ width: "18rem" }} className="card">
         <Card.Img className="img-card" variant="top" src={this.props.path} />
@@ -47,18 +53,10 @@ class Product extends Component {
               {this.props.price}
             </span>
           </Card.Text>
-          {
-            this.props.button == true ?
-              <Button className="btn-card-plus" onClick={this.addToList}>
-                <i className="fas fa-plus" />
-                Agregar
-              </Button>
-            :
-            <Button className="btn-card-plus" >
-            <i className="fas fa-plus" />
-              Agregar
-            </Button>
-          }
+          <Button className={this.props.btn} onClick={this.addToList}>
+            {icon}
+            {this.props.type}
+          </Button>
         </Card.Body>
       </Card>
     );
