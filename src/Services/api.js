@@ -116,6 +116,7 @@ export function createTerm(product){
 }
 
 export function updateTerm(product){
+    console.log(`${process.env.APISCRAPPY}update?term=${product}&key=cool_kids_program_in_ruby`)
     return fetch(`${process.env.APISCRAPPY}update?term=${product}&key=cool_kids_program_in_ruby`)
 }
 

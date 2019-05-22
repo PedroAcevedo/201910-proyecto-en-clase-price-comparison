@@ -25,7 +25,6 @@ class Item extends Component {
   }
 
   update(e){
-    
     updateTerm(this.props.product.name)
     .then((response)=>
     { 
@@ -44,10 +43,11 @@ class Item extends Component {
           <p>Última actualización: {this.props.product.date}</p>
         </td>
         <td>
-          <button className="button primary-button button-round">
+          <button className="button primary-button button-round"
+            onClick ={this.update}
+          >
             <img
               className="image-button"
-              onClick ={this.update}
               src={require("../../../CSS/icons/PNG/loop2.png")}
             />
           </button>

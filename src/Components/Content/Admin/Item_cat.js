@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { remove } from "../../../Services/api";
+import { remove, removeScrappy} from "../../../Services/api";
 import {
   NotificationContainer,
   NotificationManager
@@ -16,6 +16,9 @@ class Item_cat extends Component {
     remove({ name: this.props.category.name }).then(() => {
       NotificationManager.success("Categoria removida.", "Scrappy");
       this.props.action();
+      for(var i=0; i < this.props.category.products.length; i++){
+        removeScrappy(this.props.category.products[i].name);
+      }
       console.log(this.props.category.name, "remove succesfully");
     });
   }
