@@ -1,7 +1,7 @@
 .catalogue {
   display: flex;
   flex-direction: column;
-  padding: 20px 20px 20px 50px;
+  padding: 0px 0px 20px 50px;
   .catalogue-head {
     text-align: left;
 
@@ -28,21 +28,56 @@
       list-style-type: none;
     }
   }
-  .cart {
+
+  .pagination {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    padding: 10px 10px 10px 10px;
-    margin: 10px 10px 10px 10px;
-    .cart-button {
-      width: 75px;
-      height: 75px;
-      border-radius: 40px;
-      box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2),
-        0 4px 20px 0 rgba(0, 0, 0, 0.19);
-      .cart-button-icon {
-        align-self: center;
-      }
-    }
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.25rem;
+    align-self: center;
+  }
+  .pagination .pagination-sm .page-item:last-child .page-link {
+    border-top-right-radius: 0.2rem;
+    border-bottom-right-radius: 0.2rem;
+  }
+  .pagination .page-item:last-child .page-link {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+  }
+  .pagination .pagination-sm .page-link {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  .pagination .page-link:hover {
+    z-index: 2;
+    color: #0056b3;
+    text-decoration: none;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+  }
+  .pagination a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  .pagination .page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+  }
+  .pagination a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+  }
+  a:any-link {
+    color: -webkit-link;
+    text-decoration: underline;
+    cursor: auto;
   }
 }

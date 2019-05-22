@@ -6,11 +6,11 @@ import Footer from "./Layout/Footer";
 import Container from "./Layout/Container";
 import Signin from "./Content/Signin";
 import Signup from "./Content/Signup";
-import Adminprofile from "./Content/Adminprofile";
-import Products from "./Content/Products";
+import Adminprofile from "./Content/Admin/Adminprofile";
+import Products from "./Content/Admin/Products";
 import Contact from "./Content/Contact";
 import UserSession from "./UserSession";
-import {AuthProvider} from "./AuthContext";
+import { AuthProvider } from "./AuthContext";
 
 class App extends Component {
   render() {
@@ -19,7 +19,8 @@ class App extends Component {
         <BrowserRouter>
           <main>
             <Header />
-            <Route exact path="/" component={Container}  />
+
+            <Route exact path="/" component={Container} />
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} />
             <UserSession />
