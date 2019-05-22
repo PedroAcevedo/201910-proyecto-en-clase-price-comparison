@@ -3,6 +3,12 @@ import { Card, Button } from "react-bootstrap";
 
 class Product extends Component {
   render() {
+    let icon;
+    if (this.props.type == "Remove") {
+      icon = <i class="fas fa-trash-alt" />;
+    } else {
+      icon = <i className="fas fa-plus" />;
+    }
     return (
       <Card style={{ width: "18rem" }} className="card">
         <Card.Img className="img-card" variant="top" src={this.props.path} />
@@ -24,9 +30,9 @@ class Product extends Component {
               {this.props.price}
             </span>
           </Card.Text>
-          <Button className="btn-card-plus">
-            <i className="fas fa-plus" />
-            Agregar
+          <Button className={this.props.btn}>
+            {icon}
+            {this.props.type}
           </Button>
         </Card.Body>
       </Card>

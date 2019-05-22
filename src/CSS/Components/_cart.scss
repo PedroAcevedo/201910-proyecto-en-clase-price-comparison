@@ -1,6 +1,7 @@
 .cart {
   display: flex;
   flex-direction: column;
+  margin-top: 150px;
   .cart-head {
     text-align: left;
 
@@ -8,6 +9,7 @@
       font-size: 25px;
       padding-bottom: 5px;
       font-weight: bold;
+      max-width: 300px;
       border-bottom: $palet-1 3px solid;
     }
     .cart-subtitle {
@@ -15,57 +17,32 @@
       font-size: 20px;
     }
   }
-
-  .cart-items {
-    display: flex;
-    flex-direction: row;
-    flex-flow: wrap;
-    justify-items: center;
-    .item {
-      color: $palet-1;
-      padding: 10px 10px 10px 10px;
-      margin: 10px 10px 10px 10px;
-      background-color: $gray;
-      border-radius: 20px;
-      list-style-type: none;
-      width: 100px;
-      text-align: center;
-    }
-    .init {
-      background-color: $search-active;
-    }
-    .selected {
-      border: $search-active 4px solid;
-    }
-    button {
-      @include reset();
-      width: 50px;
-      height: 50px;
-      font-weight: bold;
-      margin-top: 5%;
-      background-color: $red;
-    }
-    .item-image {
-      width: 70%;
-      align-self: center;
+}
+.cart-body {
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+}
+.cart-footer {
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+  .btn-cart-save {
+    border-radius: 5px;
+    margin-top: 100px;
+    padding: 10px 20px;
+    border: none;
+    border: 1px #3f76aa solid;
+    background-color: white;
+    max-width: 150px;
+    color: #3f76aa;
+    align-self: left;
+    i {
+      margin-right: 10px;
     }
   }
-  .button-round {
-    @include reset();
-    width: 60px;
-    height: 60px;
-    font-weight: bold;
-    border-radius: 30px;
-    align-content: center;
-    background-color: $links-header;
-    margin: 10px;
-  }
-  .button-round:hover {
-    border: 1px solid #aeaeae;
-    background-color: $main-color;
-  }
-  .buttons-cart {
-    display: flex;
-    flex-direction: row-reverse;
+  .btn-cart-save:hover {
+    background-color: #3f76aa;
+    color: white;
   }
 }

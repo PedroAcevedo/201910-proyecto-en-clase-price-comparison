@@ -30,5 +30,20 @@
       background-color: #3f76aa;
       color: white;
     }
+    .btn-card-less {
+      border-radius: 5px;
+      padding: 10px 20px;
+      border: none;
+      border: 1px #aa3f3f solid;
+      background-color: white;
+      color: #aa3f3f;
+      i {
+        margin-right: 10px;
+      }
+    }
+    .btn-card-less:hover {
+      background-color: #aa3f3f;
+      color: white;
+    }
   }
 }
