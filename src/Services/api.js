@@ -51,6 +51,11 @@ export function list(collection){
     return fetch(`${process.env.API}/${collection}`)
 }
 
+export function listScrappy(term,page){
+    console.log(`${process.env.APISCRAPPY}term=${term}&page=${page}`)
+    return fetch(`${process.env.APISCRAPPY}term=${term}&page=${page}`)
+}
+
 export function where(collection,condition){
 	return fetch(`${process.env.API}/${collection}/${condition}`)
 }

@@ -1,7 +1,30 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+import {listScrappy} from './../../Services/api'
 class Catalogue extends Component {
+  constructor(){
+    super()	
+    this.state = {
+      products : []
+    }
+  }
+
+  componentWillMount(){
+    listScrappy("pollo","2")
+    .then( response => {
+      return response.json();
+    })
+    .then( json => {
+      console.log(json)
+      this.setState({
+				products: json
+      })
+    })
+    .catch(error=>{
+			console.log(error.message)
+    })
+  }
+   
   render() {
     return (
       <section className="catalogue ">
@@ -12,24 +35,18 @@ class Catalogue extends Component {
           </p>
         </div>
         <div className="catalogue-items item-list">
-          <a className="item">
-            <img src={require("../../Images/product.png")} />
-          </a>
-          <a className="item">
-            <img src={require("../../Images/product.png")} />
-          </a>
-          <a className="item">
-            <img src={require("../../Images/product.png")} />
-          </a>
-          <a className="item">
-            <img src={require("../../Images/product.png")} />
-          </a>
-          <a className="item">
-            <img src={require("../../Images/product.png")} />
-          </a>
-          <a className="item">
-            <img src={require("../../Images/product.png")} />
-          </a>
+        {
+           this.state.products.length > 0 ?
+           this.state.products.map(product=>{								
+             return(
+              <a className="item">
+              <img src={require(product.image)} />
+             </a>
+               )
+           })
+         :
+         <p>No hay productos registrados</p>	
+        }
         </div>
         <div className="cart">
           <Link to="/cart">
