@@ -3,7 +3,9 @@
   flex-direction: column;
   margin-top: 150px;
   .cart-head {
-    text-align: left;
+    display: flex;
+    flex-direction: row;
+    align-content: space-between !important;
 
     .cart-title {
       font-size: 25px;
@@ -15,12 +17,35 @@
       @include reset();
       font-size: 20px;
     }
+    .left-info {
+      align-self: left;
+      text-align: left;
+      flex-grow: 1;
+    }
+    .right-info {
+      border: 1px #a9a9a9 solid;
+      border-radius: 10px;
+      padding: 0px 10px 0px 10px;
+      right: 15px;
+      text-align: center;
+      font-size: 20px;
+      align-self: right;
+      background-clip: border-box;
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      border-radius: 0.25rem;
+      max-height: 50px;
+      .price {
+        font-size: 25px;
+        line-height: 0px;
+      }
+    }
   }
 }
 .cart-body {
   display: flex;
   flex-direction: row;
   flex-flow: wrap;
+  align-content: space-between !important;
 }
 .cart-footer {
   display: flex;

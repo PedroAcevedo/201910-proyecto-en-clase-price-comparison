@@ -12,10 +12,17 @@ class Cart extends Component {
           isAuth ? (
             <section className="cart component-content">
               <div className="cart-head">
-                <p className="cart-title">Lista de compra</p>
-                <p className="cart-subtitle">
-                  Última fecha de actualización: Marzo 5 del 2019
-                </p>
+                <div class="left-info">
+                  <p className="cart-title">Lista de compra</p>
+                  <p className="cart-subtitle">
+                    Última fecha de actualización: Marzo 5 del 2019
+                  </p>
+                </div>
+                <div class="right-info">
+                  <p className="price">
+                    <strong>Precio total: </strong>$2345
+                  </p>
+                </div>
               </div>
               <div className="cart-body">
                 <Product
