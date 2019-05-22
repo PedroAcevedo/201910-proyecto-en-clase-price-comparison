@@ -16,6 +16,8 @@ class Accountsettings extends Component {
       address:'',
       profileImage:''
     }
+
+    
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleFile = this.handleFile.bind(this);

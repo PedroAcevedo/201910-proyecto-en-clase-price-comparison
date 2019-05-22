@@ -1,5 +1,5 @@
 
-//Firebase User Auth
+//USER CRUD
 export function createUser(user){
     return fetch(`${process.env.API}/users`,{
         method: 'POST',
@@ -32,30 +32,6 @@ export let validateAuth = new Promise((resolve, reject) => {
       reject()   
 })
 
-
-//Firebase CRUD
-export function create(collection, obj){
-    return fetch(`${process.env.API}/${collection}`,{
-        method: 'POST',
-        body: JSON.stringify(obj),
-        headers: {
-            'Content-Type':'application/json',
-            'token': localStorage.getItem("token")
-        }
-    }
-    
-    )
-}
-
-export function list(collection){
-    return fetch(`${process.env.API}/${collection}`)
-}
-
-export function listScrappy(term,page){
-    console.log(`${process.env.APISCRAPPY}term=${term}&page=${page}`)
-    return fetch(`${process.env.APISCRAPPY}term=${term}&page=${page}`)
-}
-
 export function where(collection,condition){
 	return fetch(`${process.env.API}/${collection}/${condition}`)
 }
@@ -70,6 +46,26 @@ export function profile(collection,condition){
     })
 }
 
+
+//MongoDB categories fecths
+export function create(collection, obj){
+    return fetch(`${process.env.API}/${collection}`,{
+        method: 'POST',
+        body: JSON.stringify(obj),
+        headers: {
+            'Content-Type':'application/json',
+            'token': localStorage.getItem("token")
+        }
+    }
+    )
+}
+
+
+export function list(collection){
+    return fetch(`${process.env.API}/${collection}`)
+}
+
+
 export function update(user){
     return fetch(`${process.env.API}/users`,{
         method: 'PUT',
@@ -82,6 +78,7 @@ export function update(user){
 }
 
 export function remove(key){
+    
     return fetch(`${process.env.API}/categories`,{
         method: 'DELETE',
         body: JSON.stringify(key),
@@ -92,6 +89,8 @@ export function remove(key){
     })
 }
 
+
+
 export function removeprods(collection,key){
     return fetch(`${process.env.API}/${collection}`,{
         method: 'DELETE',
@@ -99,6 +98,37 @@ export function removeprods(collection,key){
         headers: {
             'Content-Type':'application/json',
             'token': localStorage.getItem('token')
+        }
+    })
+}
+
+
+export function createTerm(product){
+
+    return fetch(`${process.env.APISCRAPPY}update?term=${product}&key=cool_kids_program_in_ruby`,
+    {
+        method: 'PUT',
+        headers: {
+            'Content-Type':'application/json'
+        }
+    }
+    )
+}
+
+export function updateTerm(product){
+    return fetch(`${process.env.APISCRAPPY}update?term=${product}&key=cool_kids_program_in_ruby`)
+}
+
+
+export function listScrappy(term,page){
+    return fetch(`${process.env.APISCRAPPY}search?term=${term}&page=${page}`)
+}
+
+export function removeScrappy(product){
+    return fetch(`${process.env.APISCRAPPY}delete?term=${product}&key=cool_kids_program_in_ruby`,{
+        method: 'DELETE',
+        headers: {
+            'Content-Type':'application/json',
         }
     })
 }

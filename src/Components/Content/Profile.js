@@ -5,7 +5,6 @@ import { AuthConsumer} from './../AuthContext';
 
 const AuthContext = React.createContext()
 
-
 class Profile extends Component {
   static contextType = AuthContext;
   

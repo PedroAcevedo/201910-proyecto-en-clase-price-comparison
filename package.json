@@ -6,11 +6,13 @@
   "repository": "",
   "author": "jestrade <jesuestrada@gmail.com>",
   "dependencies": {
+    "bootstrap": "^4.3.1",
     "compress.js": "^1.1.2",
     "express": "^3.2.6",
     "firebase": "^5.9.0",
     "normalize.css": "^8.0.1",
     "react": "^16.8.0",
+    "react-bootstrap": "^1.0.0-beta.8",
     "react-dom": "^16.8.0",
     "react-notifications": "^1.4.3",
     "react-router-dom": "^4.3.1"
