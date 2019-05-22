@@ -39,7 +39,7 @@ class Container extends Component {
   }
 
   componentWillMount(){
-    this.consumeScrappy("pollo","1")
+    this.consumeScrappy("Res","1")
   }
    
   render() {
