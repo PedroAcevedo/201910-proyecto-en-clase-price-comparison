@@ -99,12 +99,9 @@ class Adminprofile extends Component {
   render() {
     return (
       <div>
-        <article className="adminprofile">
+        <div className="adminprofile">
           <p className="title">Administrador</p>
-          <button
-            className="button button-primary float"
-            onClick={this.add_category}
-          >
+          <button className="btn-profile" onClick={this.add_category}>
             + Crear categoría
           </button>
           <div Style="display:flex;flex-direction:row;">
@@ -135,7 +132,7 @@ class Adminprofile extends Component {
                   <tr>
                     <th>Categorías</th>
                     <th>Agregar</th>
-                    <th>Eliminar</th>
+                    <th>Cancelar</th>
                   </tr>
                   <tr>
                     <td>
@@ -150,22 +147,13 @@ class Adminprofile extends Component {
                       </lable>
                     </td>
                     <td>
-                      <button className="button primary-button button-round">
-                        <img
-                          className="image-button"
-                          src={require("../../../CSS/icons/PNG/loop2.png")}
-                        />
+                      <button className="btn-profile">
+                        <i class="fas fa-plus" />
                       </button>
                     </td>
                     <td>
-                      <button
-                        className="button primary-button button-round"
-                        onClick={this.onClose}
-                      >
-                        <img
-                          className="image-button"
-                          src={require("../../../CSS/icons/PNG/minus.png")}
-                        />
+                      <button className="btn-del" onClick={this.onClose}>
+                        <i class="fas fa-times" />
                       </button>
                     </td>
                   </tr>
@@ -173,14 +161,7 @@ class Adminprofile extends Component {
               </form>
             )}
           </div>
-          <div className="loginsButtons">
-            <a className="link " href="#">
-              <Link to="/profile" className="nav-link">
-                Usuario
-              </Link>
-            </a>
-          </div>
-        </article>
+        </div>
         <div>
           <NotificationContainer />
         </div>

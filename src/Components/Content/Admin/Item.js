@@ -1,4 +1,6 @@
-{}import React, { Component } from "react";
+{
+}
+import React, { Component } from "react";
 import { removeprods, removeScrappy, createTerm } from "../../../Services/api";
 import { NotificationManager } from "react-notifications";
 
@@ -15,25 +17,21 @@ class Item extends Component {
       date: this.props.product.date
     }).then(() => {
       NotificationManager.success("Producto removido.", "Scrappy");
-      removeScrappy(this.props.product.name)
-      .then(() => 
-      { 
-      this.props.action();
-      }
-      )
+      removeScrappy(this.props.product.name).then(() => {
+        this.props.action();
+      });
     });
   }
 
-  update(e){
+  update(e) {
     createTerm(this.props.product.name)
-    .then((response)=>
-    { 
-      return response.json();
-    })
-    .then((json)=> {
-      console.log(json);
-      NotificationManager.success("Producto actualizado.", "Scrappy");
-    })
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        console.log(json);
+        NotificationManager.success("Producto actualizado.", "Scrappy");
+      });
   }
 
   render() {
@@ -44,24 +42,13 @@ class Item extends Component {
           <p>Última actualización: {this.props.product.date}</p>
         </td>
         <td>
-          <button className="button primary-button button-round"
-            onClick ={this.update}
-          >
-            <img
-              className="image-button"
-              src={require("../../../CSS/icons/PNG/loop2.png")}
-            />
+          <button className="btn-profile" onClick={this.update}>
+            <i class="fas fa-sync-alt" />
           </button>
         </td>
         <td>
-          <button
-            className="button primary-button button-round"
-            onClick={this.onClose}
-          >
-            <img
-              className="image-button"
-              src={require("../../../CSS/icons/PNG/minus.png")}
-            />
+          <button className="btn-del" onClick={this.onClose}>
+            <i class="fas fa-trash-alt" />
           </button>
         </td>
       </tr>
