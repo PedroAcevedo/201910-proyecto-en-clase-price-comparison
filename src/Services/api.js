@@ -64,12 +64,12 @@ export function removelist(collection,product){
     })
 }
 
-export function downloadlist(collection){
-    return fetch(`${process.env.API}/${collection}`,{
+export function downloadlist(collection,id){
+    return fetch(`${process.env.API}/${collection}/${id}`,{
         method: 'GET',
         headers: {
-            'Content-Type':'application/json',
-            'token': localStorage.getItem('token')
+            'Content-Type':'text/pdf',
+           'token': localStorage.getItem('token')
         }
     })
 }

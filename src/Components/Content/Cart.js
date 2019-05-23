@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router";
 import { AuthConsumer } from "./../AuthContext";
 import { Button } from "react-bootstrap";
+import { saveAs } from 'file-saver';
 import Product from "./Catalogue/Product";
 import {getlist, downloadlist} from './../../Services/api';
 import { NotificationContainer,NotificationManager } from "react-notifications";
@@ -43,11 +44,17 @@ class Cart extends Component {
     }
   }
 
+
   download(e){
-    downloadlist("download/list")
-    .then((response)=>{
-      console.log(response)
-    })
+    console.log(":C")
+    downloadlist("users/download/list",this.props._id)
+    .then(response => response.blob())
+    .then((blob) => {    
+      console.log(blob)
+      //var file = new File([blob], "hello world.");
+      saveAs(blob,"HELOWORD.pdf");
+    }
+    );
   }
 
   componentWillMount(){
@@ -95,7 +102,9 @@ class Cart extends Component {
               )}
               </div>
               <div className="cart-footer">
-                <Button className="btn-cart-save">
+                <Button className="btn-cart-save"
+                 onClick= {this.download}
+                 >
                   <i className="far fa-save" />
                   Descargar
                 </Button>
