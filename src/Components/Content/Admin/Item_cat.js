@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { remove, removeScrappy, createTerm} from "../../../Services/api";
+import { remove, removeScrappy, createTerm } from "../../../Services/api";
 import {
   NotificationContainer,
   NotificationManager
@@ -13,10 +13,9 @@ class Item_cat extends Component {
     this.update = this.update.bind(this);
   }
 
-
-  update(e){
-    for(var i=0; i < this.props.category.products.length; i++){
-      setTimeout(createTerm(this.props.category.products[i].name), 5000)    
+  update(e) {
+    for (var i = 0; i < this.props.category.products.length; i++) {
+      setTimeout(createTerm(this.props.category.products[i].name), 5000);
     }
     NotificationManager.success("Producto actualizado.", "Scrappy");
   }
@@ -25,7 +24,7 @@ class Item_cat extends Component {
     remove({ name: this.props.category.name }).then(() => {
       NotificationManager.success("Categoria removida.", "Scrappy");
       this.props.action();
-      for(var i=0; i < this.props.category.products.length; i++){
+      for (var i = 0; i < this.props.category.products.length; i++) {
         removeScrappy(this.props.category.products[i].name);
       }
       console.log(this.props.category.name, "remove succesfully");
@@ -40,11 +39,8 @@ class Item_cat extends Component {
           <p>Última actualización: {this.props.category.date}</p>
         </td>
         <td>
-          <button className="button primary-button button-round" onClick={this.update}>
-            <img
-              className="image-button"
-              src={require("../../../CSS/icons/PNG/loop2.png")}
-            />
+          <button className="btn-profile" onClick={this.update}>
+            <i class="fas fa-sync-alt" />
           </button>
         </td>
         <td>
@@ -53,23 +49,14 @@ class Item_cat extends Component {
               this.props.category.name
             }`}
           >
-            <button className="button primary-button button-round">
-              <img
-                className="image-button"
-                src={require("../../../CSS/icons/PNG/pencil.png")}
-              />
+            <button className="btn-profile">
+              <i class="fas fa-pencil-alt" />
             </button>
           </Link>
         </td>
         <td>
-          <button
-            className="button primary-button button-round"
-            onClick={this.onClose}
-          >
-            <img
-              className="image-button"
-              src={require("../../../CSS/icons/PNG/minus.png")}
-            />
+          <button className="btn-del" onClick={this.onClose}>
+            <i class="fas fa-trash-alt" />
           </button>
         </td>
       </tr>

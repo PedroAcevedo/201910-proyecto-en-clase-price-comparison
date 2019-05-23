@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { create, list, createTerm} from "../../../Services/api";
+import { create, list, createTerm } from "../../../Services/api";
 import {
   NotificationContainer,
   NotificationManager
@@ -82,19 +82,17 @@ class Products extends Component {
         producto
       ).then(() => {
         createTerm(this.state.name_prod)
-        .then( (response) => {
-          return response.json()
-        })
-        .then((json) =>{
-          console.log(json)
-          this.setState({
-            name_prod: "",
-            create_prod: false
+          .then(response => {
+            return response.json();
+          })
+          .then(json => {
+            console.log(json);
+            this.setState({
+              name_prod: "",
+              create_prod: false
+            });
+            this.refresh();
           });
-          this.refresh();
-        
-        }
-        )
         NotificationManager.success("Producto registrado.", "Scrappy");
       });
     }
@@ -117,10 +115,7 @@ class Products extends Component {
       <div>
         <article className="adminprofile">
           <p className="title">Categoría: {this.props.match.params.cat}</p>
-          <button
-            className="button button-primary float"
-            onClick={this.add_product}
-          >
+          <button className="btn-profile" onClick={this.add_product}>
             + Crear nuevo producto
           </button>
           <div Style="display:flex;flex-direction:row;">
@@ -166,23 +161,13 @@ class Products extends Component {
                       </lable>
                     </td>
                     <td>
-                      <button 
-                        className="button primary-button button-round"                      >
-                        <img
-                          className="image-button"
-                          src={require("../../../CSS/icons/PNG/loop2.png")}
-                        />
+                      <button className="btn-profile">
+                        <i class="fas fa-sync-alt" />
                       </button>
                     </td>
                     <td>
-                      <button
-                        className="button primary-button button-round"
-                        onClick={this.onClose}
-                      >
-                        <img
-                          className="image-button"
-                          src={require("../../../CSS/icons/PNG/minus.png")}
-                        />
+                      <button className="btn-del" onClick={this.onClose}>
+                        <i class="fas fa-trash-alt" />
                       </button>
                     </td>
                   </tr>
@@ -190,13 +175,12 @@ class Products extends Component {
               </form>
             )}
           </div>
-          <div className="loginsButtons">
-            <a className="link " href="#">
-              <Link to="/profile" className="nav-link">
-                Usuario
-              </Link>
-            </a>
-          </div>
+          <a className="link " href="#">
+            <Link to="/adminprofile">
+              <i class="fas fa-backward" />
+              Volver
+            </Link>
+          </a>
         </article>
         <div>
           <NotificationContainer />
