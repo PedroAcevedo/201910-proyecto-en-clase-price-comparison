@@ -28,6 +28,14 @@ class Profile extends Component {
                 <div>
                   <h2 className="title">Perfil: {user[0].name}</h2>
                   <div className="profile-body">
+                    <div className="profile-photo ">
+                      <picture>
+                        <img
+                          className="profile-photo"
+                          src={user[0].profileImage}
+                        />
+                      </picture>
+                    </div>
                     <div className="info-profile">
                       <label for="name" className="label">
                         <strong>E-mail: </strong> {user[0].email}
@@ -37,15 +45,6 @@ class Profile extends Component {
                           <strong>Dirección: </strong> {user[0].address}
                         </label>
                       </div>
-                    </div>
-
-                    <div className="profile-photo ">
-                      <picture>
-                        <img
-                          className="profile-photo"
-                          src={user[0].profileImage}
-                        />
-                      </picture>
                     </div>
                   </div>
                   <div>

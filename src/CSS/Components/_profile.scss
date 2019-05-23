@@ -3,7 +3,7 @@
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  padding: 150px 50px;
+  padding: 150px 50px 50px 50px;
   text-align: center;
   min-width: 350px;
   .title {
@@ -20,9 +20,8 @@
   }
   .profile-body {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
-    flex-flow: wrap;
     align-self: center;
     .info-profile {
       display: flex;
@@ -39,7 +38,7 @@
     height: 200px;
     background-color: $gray;
     border-radius: 50%;
-    align-self: flex-end;
+    align-self: center;
     .photo {
       width: 100%;
     }
@@ -51,7 +50,7 @@
   }
   .btn-profile {
     border-radius: 5px;
-    margin-top: 50px;
+    margin-top: 10px;
     margin-left: 20px;
     padding: 10px 20px;
     border: none;
@@ -60,6 +59,7 @@
     max-width: 200px;
     color: #3f76aa;
     align-self: left;
+    cursor: pointer;
     i {
       margin-right: 10px;
     }
