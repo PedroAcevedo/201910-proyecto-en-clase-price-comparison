@@ -1,47 +1,70 @@
-.signup {
+.sign {
   display: flex;
   flex-direction: column;
   align-content: left;
+  align-self: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  align-content: stretch;
+  text-align: center;
   .title {
     text-align: center;
     margin: 30px 30px;
   }
 
-  div {
-    align-content: stretch;
-    text-align: center;
-
-    button {
-      margin: 10px 10px 10px 10px;
-    }
-
-    input {
-      border-radius: 20px;
-      width: 100%;
-    }
+  input {
+    border-radius: 7px;
+    width: 100%;
   }
-}
-.signin {
-  display: flex;
-  flex-direction: column;
-  align-content: left;
-  margin-bottom: 80px;
-  .title {
-    text-align: center;
-    margin: 50px 30px;
+  a .link {
+    color: #3f76aa;
   }
 
-  div {
-    align-content: stretch;
-    text-align: center;
-
-    button {
-      margin: 10px 10px 10px 10px;
+  .input-image {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    margin: 20px;
+    max-width: 600px;
+    min-width: 350px;
+    height: 150px;
+    padding: 20px;
+    border: 1px #6987a3d2 solid;
+    border-radius: 15px;
+    .btn-image {
+      font-size: 15px !important;
+      align-self: left;
+      position: relative;
+      top: 60px;
     }
-
-    input {
-      border-radius: 20px;
-      width: 100%;
+    img {
+      max-width: 200px;
+      max-height: 150px;
+      border-radius: 500px;
+      border: 1px #3f76aa solid;
+      margin-left: 20px;
     }
+  }
+
+  .btn-profile {
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-left: 20px;
+    padding: 10px 20px;
+    border: none;
+    border: 1px #3f76aa solid;
+    background-color: white;
+    max-width: 200px;
+    color: #3f76aa;
+    align-self: center;
+    cursor: pointer;
+    margin-bottom: 20px;
+    i {
+      margin-right: 10px;
+    }
+  }
+  .btn-profile:hover {
+    background-color: #3f76aa;
+    color: white;
   }
 }
