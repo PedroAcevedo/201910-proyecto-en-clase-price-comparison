@@ -15,10 +15,6 @@ class Product extends Component {
         <p>
           <strong>Precio: </strong> {this.props.price}
         </p>
-        <button className="btn-cart-save">
-          <i class="far fa-save" />
-          Descargar
-        </button>
       </div>
     );
   }

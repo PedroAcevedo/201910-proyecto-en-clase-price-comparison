@@ -2,69 +2,66 @@ import React, { Component } from "react";
 import { Redirect } from "react-router";
 import { AuthConsumer } from "./../AuthContext";
 import { Button } from "react-bootstrap";
-import { saveAs } from 'file-saver';
+import { saveAs } from "file-saver";
 import Product from "./Catalogue/Product";
-import {getlist, downloadlist} from './../../Services/api';
-import { NotificationContainer,NotificationManager } from "react-notifications";
+import { getlist, downloadlist } from "./../../Services/api";
+import {
+  NotificationContainer,
+  NotificationManager
+} from "react-notifications";
 
 class Cart extends Component {
-  
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       products: [],
       price: 0
-    }
-    this.refresh = this.refresh.bind(this)
-    this.download = this.download.bind(this)
+    };
+    this.refresh = this.refresh.bind(this);
+    this.download = this.download.bind(this);
   }
 
-  refresh(){
-    if(this.props._id){
-      getlist("users/list",this.props._id)
-      .then((response) => {
+  refresh() {
+    if (this.props._id) {
+      getlist("users/list", this.props._id)
+        .then(response => {
           return response.json();
-      }
-      )
-      .then((json)=>{
-        console.log(json)
-        this.setState({
-          products: json["products"],
-          date: json["date"]
         })
-        var total = 0
-        for(var products in json["products"]){
-
-          total =  total + parseInt(json["products"][products]["price"],10)
-        }
-        this.setState({
-          price: total
-        })
-      })
+        .then(json => {
+          console.log(json);
+          this.setState({
+            products: json["products"],
+            date: json["date"]
+          });
+          var total = 0;
+          for (var products in json["products"]) {
+            total = total + parseInt(json["products"][products]["price"], 10);
+          }
+          this.setState({
+            price: total
+          });
+        });
     }
   }
 
-
-  download(e){
-    console.log(":C")
-    downloadlist("users/download/list",this.props._id)
-    .then(response => response.blob())
-    .then((blob) => {    
-      console.log(blob)
-      //var file = new File([blob], "hello world.");
-      saveAs(blob,".pdf");
-    }
-    );
+  download(e) {
+    downloadlist("users/download/list", this.props._id)
+      .then(response => response.blob())
+      .then(blob => {
+        console.log(blob);
+        //var file = new File([blob], "hello world.");
+        saveAs(blob, ".pdf");
+      });
   }
 
-  componentWillMount(){
+  componentWillMount() {
     this.refresh();
   }
 
   render() {
     return (
       <AuthConsumer>
-        {({ isAuth, user}) =>
+        {({ isAuth, user }) =>
           isAuth ? (
             <section className="cart component-content">
               <div className="cart-head">
@@ -81,36 +78,34 @@ class Cart extends Component {
                 </div>
               </div>
               <div className="cart-body">
-              {this.state.products.length > 0 ? (
-                this.state.products.map(products => {
-                  return (
-                    <Product
-                      name = {products.name}
-                      mark= {products.mark}
-                      shop= {products.shop}
-                      price={products.price}
-                      userId={user[0] != null ? user[0]._id : null}
-                      path={products.image}
-                      btn="btn-card-less"
-                      type="Remover"
-                      action = {this.refresh}
-                    />
-                  );
-                })
-              ) : (
-                <p>No hay categorias registradas.</p>
-              )}
+                {this.state.products != null ? (
+                  this.state.products.map(products => {
+                    return (
+                      <Product
+                        name={products.name}
+                        mark={products.mark}
+                        shop={products.shop}
+                        price={products.price}
+                        userId={user[0] != null ? user[0]._id : null}
+                        path={products.image}
+                        btn="btn-card-less"
+                        type="Remover"
+                        action={this.refresh}
+                      />
+                    );
+                  })
+                ) : (
+                  <p>No hay categorias registradas.</p>
+                )}
               </div>
               <div className="cart-footer">
-                <Button className="btn-cart-save"
-                 onClick= {this.download}
-                 >
+                <Button className="btn-cart-save" onClick={this.download}>
                   <i className="far fa-save" />
                   Descargar
                 </Button>
               </div>
               <div>
-                <NotificationContainer/>
+                <NotificationContainer />
               </div>
             </section>
           ) : (
