@@ -1,0 +1,32 @@
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  align-self: center;
+  margin: 10px;
+  max-width: 500px;
+  padding: 5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  align-content: space-between;
+  p {
+    margin-right: 15px;
+  }
+
+  .btn-cart-save {
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: none;
+    border: 1px #3f76aa solid;
+    background-color: white;
+    max-width: 150px;
+    color: #3f76aa;
+    align-self: flex-end;
+    i {
+      margin-right: 10px;
+    }
+  }
+  .btn-cart-save:hover {
+    background-color: #3f76aa;
+    color: white;
+  }
+}

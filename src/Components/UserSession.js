@@ -4,11 +4,11 @@ import { Route } from "react-router-dom";
 import Cart from "./Content/Cart";
 import List from "./Content/Contact";
 import Profile from "./Content/Profile";
-import History from "./Content/History";
+import History from "./Content/History/History";
 import Recoverypass from "./Content/Recoverypass";
 import Accountsettings from "./Content/Accountsettings";
 
-import {AuthConsumer} from "./AuthContext";
+import { AuthConsumer } from "./AuthContext";
 
 class UserSession extends Component {
   render() {
@@ -18,7 +18,7 @@ class UserSession extends Component {
             <main>
               <Route path="/cart" component={() => <Cart _id = {context.id} />} />
               <Route path="/list" component={List} />
-              <Route path="/profile"  component={() => <Profile email = {context.email} />} />
+              <Route path="/profile"  component={() => <Profile email = {context.email} action = {context.action} />} />
               <Route path="/history" component={() => <History _id = {context.id} />} />
               <Route path="/recoverypass" component={Recoverypass} />
               <Route path="/accountsettings" component={() => <Accountsettings email = {context.email} />}  />

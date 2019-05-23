@@ -2,44 +2,70 @@
   display: flex;
   flex-direction: column;
   align-content: center;
-  padding: 40px 150px 50px 150px;
+  justify-content: center;
+  padding: 150px 50px 50px 50px;
   text-align: center;
+  min-width: 350px;
   .title {
     text-align: left;
     margin-bottom: 30px;
-    border-bottom: $palet-1 3px solid;
+    align-self: center;
+    border-bottom: $palet-1 2px solid;
   }
+
   .label {
     font-size: 20px;
-    font-weight: bold;
     padding: 5px;
     margin: 5px;
   }
-  .info-profile {
-    padding: 10px 0px 10px 10px;
+  .profile-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    .info-profile {
+      display: flex;
+      flex-direction: column;
+
+      padding: 10px 0px 10px 10px;
+    }
   }
 
-  div {
-    .profile-photo {
-      @include reset();
-      text-align: center;
-      width: 200px;
-      height: 200px;
-      background-color: $gray;
-      border-radius: 50%;
-      align-self: flex-end;
-      .photo {
-        width: 100%;
-      }
-    }
-
-    button {
-      margin: 10px 10px 10px 10px;
-    }
-
-    input {
-      border-radius: 20px;
+  .profile-photo {
+    @include reset();
+    text-align: center;
+    width: 200px;
+    height: 200px;
+    background-color: $gray;
+    border-radius: 50%;
+    align-self: center;
+    .photo {
       width: 100%;
     }
+  }
+
+  input {
+    border-radius: 20px;
+    width: 100%;
+  }
+  .btn-profile {
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-left: 20px;
+    padding: 10px 20px;
+    border: none;
+    border: 1px #3f76aa solid;
+    background-color: white;
+    max-width: 200px;
+    color: #3f76aa;
+    align-self: left;
+    cursor: pointer;
+    i {
+      margin-right: 10px;
+    }
+  }
+  .btn-profile:hover {
+    background-color: #3f76aa;
+    color: white;
   }
 }

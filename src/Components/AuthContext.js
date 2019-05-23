@@ -6,6 +6,7 @@ class AuthProvider extends Component {
  
   constructor() {
     super()
+    this.userInfo = this.userInfo.bind(this)
     this.state = {  isAuth: false, email: '', user: []}
     this.login = this.login.bind(this)
     this.logout = this.logout.bind(this)
@@ -14,7 +15,12 @@ class AuthProvider extends Component {
   login(email){
     setTimeout(() => this.setState({ isAuth: true }), 1000)
     console.log(email)
-    profile("users",email)
+    this.userInfo()
+    this.setState({email: email})
+  }
+
+  userInfo(){
+    profile("users",this.state.email)
 		.then( response => {
       return response.json();
     })
@@ -26,7 +32,6 @@ class AuthProvider extends Component {
     .catch(error=>{
 			console.log(error.message)
     })
-    this.setState({email: email})
   }
 
   logout() {
@@ -34,6 +39,7 @@ class AuthProvider extends Component {
     localStorage.clear();
     signOut()
   }
+
 
   componentDidMount(){
     validateAuth
@@ -70,7 +76,8 @@ class AuthProvider extends Component {
           logout: this.logout,
           email: this.state.email,
           user: this.state.user,
-          id: this.state.user[0]!=null? this.state.user[0]["_id"] : null
+          id: this.state.user[0]!=null? this.state.user[0]["_id"] : null,
+          action: this.userInfo
         }}
       >
         {this.props.children}

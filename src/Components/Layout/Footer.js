@@ -7,7 +7,12 @@ class Footer extends Component {
       <footer className="footer">
         <div className="container">
           <p className="copyright">Scrappy, 2019.</p>
-          <i class="fab fa-github" />
+          <a
+            href="https://github.com/PedroAcevedo/201910-proyecto-en-clase-price-comparison"
+            Style="color:white;"
+          >
+            <i class="fab fa-github" />
+          </a>
           <p>By Pedro Acevedo, Carlos Conrado y Dinorah Perez.</p>
         </div>
       </footer>
