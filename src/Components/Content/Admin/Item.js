@@ -1,5 +1,5 @@
 {}import React, { Component } from "react";
-import { removeprods, removeScrappy, updateTerm } from "../../../Services/api";
+import { removeprods, removeScrappy, createTerm } from "../../../Services/api";
 import { NotificationManager } from "react-notifications";
 
 class Item extends Component {
@@ -25,13 +25,14 @@ class Item extends Component {
   }
 
   update(e){
-    updateTerm(this.props.product.name)
+    createTerm(this.props.product.name)
     .then((response)=>
     { 
       return response.json();
     })
     .then((json)=> {
       console.log(json);
+      NotificationManager.success("Producto actualizado.", "Scrappy");
     })
   }
 

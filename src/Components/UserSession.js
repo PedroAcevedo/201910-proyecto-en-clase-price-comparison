@@ -16,10 +16,10 @@ class UserSession extends Component {
       <AuthConsumer>
           {context => (
             <main>
-              <Route path="/cart" component={Cart} />
+              <Route path="/cart" component={() => <Cart _id = {context.id} />} />
               <Route path="/list" component={List} />
               <Route path="/profile"  component={() => <Profile email = {context.email} />} />
-              <Route path="/history" component={History} />
+              <Route path="/history" component={() => <History _id = {context.id} />} />
               <Route path="/recoverypass" component={Recoverypass} />
               <Route path="/accountsettings" component={() => <Accountsettings email = {context.email} />}  />
             </main>

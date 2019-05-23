@@ -69,7 +69,8 @@ class AuthProvider extends Component {
           login: this.login,
           logout: this.logout,
           email: this.state.email,
-          user: this.state.user
+          user: this.state.user,
+          id: this.state.user[0]!=null? this.state.user[0]["_id"] : null
         }}
       >
         {this.props.children}

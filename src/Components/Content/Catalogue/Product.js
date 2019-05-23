@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
-import { create } from './../../../Services/api'
+import { create, removelist } from './../../../Services/api';
+import { NotificationManager } from "react-notifications";
 class Product extends Component {
   constructor(props){
     super(props)
@@ -9,20 +10,34 @@ class Product extends Component {
   }
   
   addToList(e){
-    create(`users/list/${this.props.userId}`,
-    {
-      "name": this.props.name,
-      "brand": this.props.brand,
-      "mark": this.props.mark,
-      "price": this.props.price,
-      "image": this.props.path
-    })
-		.then( response => {
-      return response.json();
-    })
-    .then( json => {
-      console.log(json)
-    })
+    if(this.props.type=="Añadir"){
+      create(`users/list/${this.props.userId}`,
+      {
+        "name": this.props.name,
+        "brand": this.props.brand,
+        "mark": this.props.mark,
+        "price": this.props.price,
+        "image": this.props.path,
+        "shop": this.props.chain
+      })
+      .then( response => {
+        return response.json();
+      })
+      .then( json => {
+        console.log(json)
+        NotificationManager.success("Producto añadido.", "Scrappy");
+      })
+    }else{
+      removelist(`users/list/${this.props.userId}`,this.props.name)
+      .then( response => {
+        return response.json();
+      })
+      .then( json => {
+        NotificationManager.error("Producto removido de la lista.", "Scrappy");
+        this.props.action();
+        console.log(json)
+      })
+    }
   }
 
   render() {

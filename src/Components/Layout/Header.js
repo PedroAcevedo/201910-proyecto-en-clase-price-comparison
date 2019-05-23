@@ -13,7 +13,7 @@ class Header extends Component {
   render() {
     return (
       <AuthConsumer>
-        {({ isAuth, logout }) => (
+        {({ isAuth, logout, id}) => (
           <header className="header container ">
             <div className="logo">
               <img src={require("../../Images/logo.png")} />
@@ -24,7 +24,7 @@ class Header extends Component {
                 <i class="fas fa-store" />
                 Catálogo
               </Link>
-              <Link to="/cart" className="nav-item">
+              <Link to="/cart" className="nav-item" >
                 <i class="fas fa-list-ul" />
                 Lista
               </Link>

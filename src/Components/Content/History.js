@@ -1,7 +1,26 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router";
+import {gethistorical} from './../../Services/api';
 import { AuthConsumer } from "./../AuthContext";
 class History extends Component {
+  constructor(props){
+    super(props)
+
+  }
+
+  componentWillMount(){
+    if(this.props._id){
+      gethistorical("users/historical",this.props._id)
+      .then((response) => {
+          return response.json();
+      }
+      )
+      .then((json)=>{
+        console.log(json)
+      })
+    }
+  }
+  
   render() {
     return (
       <AuthConsumer>

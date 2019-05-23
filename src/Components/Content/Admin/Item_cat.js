@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { remove, removeScrappy} from "../../../Services/api";
+import { remove, removeScrappy, createTerm} from "../../../Services/api";
 import {
   NotificationContainer,
   NotificationManager
@@ -10,6 +10,16 @@ class Item_cat extends Component {
   constructor() {
     super();
     this.onClose = this.onClose.bind(this);
+    this.update = this.update.bind(this);
+  }
+
+    
+
+  update(e){
+    for(var i=0; i < this.props.category.products.length; i++){
+      setTimeout(createTerm(this.props.category.products[i].name), 5000)    
+    }
+    NotificationManager.success("Producto actualizado.", "Scrappy");
   }
 
   onClose(e) {
@@ -31,7 +41,7 @@ class Item_cat extends Component {
           <p>Última actualización: {this.props.category.date}</p>
         </td>
         <td>
-          <button className="button primary-button button-round">
+          <button className="button primary-button button-round" onClick={this.update}>
             <img
               className="image-button"
               src={require("../../../CSS/icons/PNG/loop2.png")}

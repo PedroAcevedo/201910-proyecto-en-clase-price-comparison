@@ -32,6 +32,38 @@ export let validateAuth = new Promise((resolve, reject) => {
       reject()   
 })
 
+export function getlist(collection,id){
+    return fetch(`${process.env.API}/${collection}/${id}/actual`,{
+        method: 'GET',
+        headers: {
+            'Content-Type':'application/json',
+            'token': localStorage.getItem('token')
+        }
+    })
+}
+
+export function gethistorical(collection,id){
+    return fetch(`${process.env.API}/${collection}/${id}`,{
+        method: 'GET',
+        headers: {
+            'Content-Type':'application/json',
+            'token': localStorage.getItem('token')
+        }
+    })
+}
+
+export function removelist(collection,product){
+    console.log(`${process.env.API}/${collection}`)
+    return fetch(`${process.env.API}/${collection}`,{
+        method: 'DELETE',
+        headers: {
+            'Content-Type':'application/json',
+            'token': localStorage.getItem('token'),
+            'product': product
+        }
+    })
+}
+
 export function where(collection,condition){
 	return fetch(`${process.env.API}/${collection}/${condition}`)
 }
@@ -113,11 +145,6 @@ export function createTerm(product){
         }
     }
     )
-}
-
-export function updateTerm(product){
-    console.log(`${process.env.APISCRAPPY}update?term=${product}&key=cool_kids_program_in_ruby`)
-    return fetch(`${process.env.APISCRAPPY}update?term=${product}&key=cool_kids_program_in_ruby`)
 }
 
 

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {listScrappy} from './../../Services/api'
 import Catalogue from "../Content/Catalogue/Catalogue";
 import Aside from "./Aside";
+import { NotificationContainer,NotificationManager } from "react-notifications";
 class Container extends Component {
   
   constructor(){
@@ -49,7 +50,10 @@ class Container extends Component {
          { 
               this.state.products.length &&
               <Catalogue products={this.state.products} />
-         } 
+         }
+        <div>
+            <NotificationContainer/>
+        </div> 
       </section>
     );
   }
