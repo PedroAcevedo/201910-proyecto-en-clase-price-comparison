@@ -13,7 +13,6 @@ class Item_cat extends Component {
     this.update = this.update.bind(this);
   }
 
-    
 
   update(e){
     for(var i=0; i < this.props.category.products.length; i++){
