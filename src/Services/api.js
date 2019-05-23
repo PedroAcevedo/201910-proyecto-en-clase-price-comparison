@@ -64,6 +64,16 @@ export function removelist(collection,product){
     })
 }
 
+export function downloadlist(collection){
+    return fetch(`${process.env.API}/${collection}`,{
+        method: 'GET',
+        headers: {
+            'Content-Type':'application/json',
+            'token': localStorage.getItem('token')
+        }
+    })
+}
+
 export function where(collection,condition){
 	return fetch(`${process.env.API}/${collection}/${condition}`)
 }

@@ -3,7 +3,7 @@ import { Redirect } from "react-router";
 import { AuthConsumer } from "./../AuthContext";
 import { Button } from "react-bootstrap";
 import Product from "./Catalogue/Product";
-import {getlist} from './../../Services/api';
+import {getlist, downloadlist} from './../../Services/api';
 import { NotificationContainer,NotificationManager } from "react-notifications";
 
 class Cart extends Component {
@@ -15,6 +15,7 @@ class Cart extends Component {
       price: 0
     }
     this.refresh = this.refresh.bind(this)
+    this.download = this.download.bind(this)
   }
 
   refresh(){
@@ -40,6 +41,13 @@ class Cart extends Component {
         })
       })
     }
+  }
+
+  download(e){
+    downloadlist("download/list")
+    .then((response)=>{
+      console.log(response)
+    })
   }
 
   componentWillMount(){
