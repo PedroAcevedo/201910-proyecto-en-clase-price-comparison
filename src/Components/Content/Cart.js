@@ -52,7 +52,7 @@ class Cart extends Component {
     .then((blob) => {    
       console.log(blob)
       //var file = new File([blob], "hello world.");
-      saveAs(blob,"HELOWORD.pdf");
+      saveAs(blob,".pdf");
     }
     );
   }
