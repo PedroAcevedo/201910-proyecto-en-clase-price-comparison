@@ -162,7 +162,7 @@ class Products extends Component {
                     </td>
                     <td>
                       <button className="btn-profile">
-                        <i class="fas fa-sync-alt" />
+                        <i class="fas fa-plus" />
                       </button>
                     </td>
                     <td>
